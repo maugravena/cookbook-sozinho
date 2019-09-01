@@ -3,8 +3,9 @@ require 'rails_helper'
 feature 'User edit recipe' do
   scenario 'Successfully' do
     recipe_type = RecipeType.create(name: 'Sobremesa')
+    cuisine = Cuisine.create(name: 'Brasileira')
     Recipe.create!(title: 'Bolodecenoura', recipe_type: recipe_type,
-                   cuisine: 'Brasileira', difficulty: 'Média',
+                   cuisine: cuisine, difficulty: 'Média',
                    cook_time: 30, ingredients: 'farinha, ovo, cenoura',
                    cook_method: 'Misture tudo e coloque no forno')
 
@@ -14,7 +15,7 @@ feature 'User edit recipe' do
 
     fill_in 'Título', with: 'Bolo de cenoura'
     select 'Sobremesa', from: 'Tipo da Receita'
-    fill_in 'Cozinha', with: 'Brasileira'
+    select 'Brasileira', from: 'Cozinha'
     fill_in 'Dificuldade', with: 'Média'
     fill_in 'Tempo de Preparo', with: 30
     fill_in 'Ingredientes', with: 'farinha, ovo, cenoura'

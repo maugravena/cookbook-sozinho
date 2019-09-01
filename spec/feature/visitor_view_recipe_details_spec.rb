@@ -3,8 +3,9 @@ require 'rails_helper'
 feature 'Visitor view recipe details' do
   scenario 'Successfully' do
     recipe_type = RecipeType.create(name: 'Sobremesa')
+    cuisine = Cuisine.create(name: 'Brasileira')
     recipe = Recipe.create!(title: 'Bolo de cenoura', recipe_type: recipe_type,
-                            cuisine: 'Brasileira', difficulty: 'Média',
+                            cuisine: cuisine, difficulty: 'Média',
                             cook_time: '30', ingredients: 'farinha, ovo, cenoura',
                             cook_method: 'misture tudo e coloque no forno')
 
@@ -13,7 +14,7 @@ feature 'Visitor view recipe details' do
 
     expect(page).to have_css('h3', text: recipe.title)
     expect(page).to have_css('p', text: recipe.recipe_type.name)
-    expect(page).to have_css('p', text: recipe.cuisine)
+    expect(page).to have_css('p', text: recipe.cuisine.name)
     expect(page).to have_css('p', text: recipe.difficulty)
     expect(page).to have_css('p', text: recipe.cook_time)
     expect(page).to have_css('h3', text: 'Ingredientes')
