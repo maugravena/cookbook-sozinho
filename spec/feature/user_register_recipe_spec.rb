@@ -2,12 +2,13 @@ require 'rails_helper'
 
 feature 'User register recipe' do
   scenario 'Successfully' do
+    RecipeType.create(name: 'Salgada')
     visit root_path
 
     click_on 'Enviar uma receita'
 
     fill_in 'Título', with: 'Torta de Berinjela'
-    fill_in 'Tipo da Receita', with: 'Salgada'
+    select 'Salgada', from: 'Tipo da Receita'
     fill_in 'Cozinha', with: 'Brasileira'
     fill_in 'Dificuldade', with: 'Média'
     fill_in 'Tempo de Preparo', with: 20
