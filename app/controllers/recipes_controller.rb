@@ -10,8 +10,15 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.create!(recipe_params)
-    redirect_to @recipe
+    @recipe = Recipe.create(recipe_params)
+    if @recipe.valid?
+      redirect_to @recipe
+    else
+      @recipe_types = RecipeType.all
+      @cuisines = Cuisine.all
+      flash.now[:error] = 'Você deve informar todos os dados da receita'
+      render :new
+    end
   end
 
   def edit

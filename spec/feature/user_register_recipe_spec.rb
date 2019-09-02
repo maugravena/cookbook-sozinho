@@ -27,4 +27,22 @@ feature 'User register recipe' do
     expect(page).to have_css('h3', text: 'Como Preparar')
     expect(page).to have_css('p', text: 'Misture tudo e coloque no forno')
   end
+
+  scenario 'and must fill in all fields' do
+    RecipeType.create(name: 'Salgada')
+    Cuisine.create(name: 'Brasileira')
+    visit root_path
+    click_on 'Enviar uma receita'
+
+    fill_in 'Título', with: ''
+    select '', from: 'Tipo da Receita'
+    select '', from: 'Cozinha'
+    fill_in 'Dificuldade', with: ''
+    fill_in 'Tempo de Preparo', with: ''
+    fill_in 'Ingredientes', with: ''
+    fill_in 'Modo de Preparo', with: ''
+    click_on 'Enviar'
+
+    expect(page).to have_content 'Você deve informar todos os dados da receita'
+  end
 end
