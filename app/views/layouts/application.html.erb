@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    <%= flash[:notice] %>
     <%= form_with url: recipes_path, method: 'get' do %>
       <%= label_tag :q, 'Buscar receita:' %>
       <%= text_field_tag :q %>
