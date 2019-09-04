@@ -22,7 +22,10 @@ feature 'User authenticates to the site' do
     fill_in 'Password confirmation', with: '123456'
     click_on 'Sign up'
 
-    expect(page).to have_no_css('a', text: 'Entrar')
-    expect(page).to have_css('a', text: 'Sair')
+    click_on 'Sair'
+
+    expect(page).to have_content I18n.t('devise.sessions.signed_out')
+    #expect(page).to have_no_css('a', text: 'Entrar')
+    #expect(page).to have_css('a', text: 'Sair')
   end
 end
