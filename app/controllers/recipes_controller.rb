@@ -10,8 +10,9 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.create(recipe_params)
-    if @recipe.valid?
+    @recipe = Recipe.new(recipe_params)
+    @recipe.user = current_user
+    if @recipe.save
       redirect_to @recipe
     else
       @recipe_types = RecipeType.all
