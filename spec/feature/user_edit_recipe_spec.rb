@@ -4,7 +4,8 @@ feature 'User edit recipe' do
   scenario 'Successfully' do
     recipe_type = RecipeType.create(name: 'Sobremesa')
     cuisine = Cuisine.create(name: 'Brasileira')
-    Recipe.create!(title: 'Bolodecenoura', recipe_type: recipe_type,
+    user = User.create(email: 'email@email.com', password: '123456')
+    Recipe.create!(user: user, title: 'Bolodecenoura', recipe_type: recipe_type,
                    cuisine: cuisine, difficulty: 'Média',
                    cook_time: 30, ingredients: 'farinha, ovo, cenoura',
                    cook_method: 'Misture tudo e coloque no forno')

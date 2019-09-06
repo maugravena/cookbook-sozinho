@@ -4,11 +4,14 @@ feature 'User a search recipe' do
   scenario 'by exact name and find' do
     recipe_type = RecipeType.create(name: 'Sobremesa')
     cuisine = Cuisine.create(name: 'Brasileira')
-    recipe = Recipe.create(title: 'Bolo de cenoura', recipe_type: recipe_type,
+    user = User.create(email: 'email@email.com', password: '123456')
+
+    recipe = Recipe.create(user: user,title: 'Bolo de cenoura', recipe_type: recipe_type,
                             cuisine: cuisine, difficulty: 'Média',
                             cook_time: '30', ingredients: 'farinha, ovo, cenoura',
                             cook_method: 'misture tudo e coloque no forno')
-    other_recipe = Recipe.create(title: 'Torta de maça', recipe_type: recipe_type,
+
+    other_recipe = Recipe.create(user: user, title: 'Torta de maça', recipe_type: recipe_type,
                             cuisine: cuisine, difficulty: 'Média',
                             cook_time: '30', ingredients: 'farinha, ovo, maça',
                             cook_method: 'misture tudo e coloque no forno')
@@ -34,13 +37,14 @@ feature 'User a search recipe' do
   scenario 'by partial name and find more than one' do
     recipe_type = RecipeType.create(name: 'Sobremesa')
     cuisine = Cuisine.create(name: 'Brasileira')
+    user = User.create(email: 'email@email.com', password: '123456')
 
-    recipe = Recipe.create(title: 'Bolo de cenoura', recipe_type: recipe_type,
+    recipe = Recipe.create(user: user, title: 'Bolo de cenoura', recipe_type: recipe_type,
                             cuisine: cuisine, difficulty: 'Média',
                             cook_time: '30', ingredients: 'farinha, ovo, cenoura',
                             cook_method: 'misture tudo e coloque no forno')
 
-    other_recipe = Recipe.create(title: 'Bolo de maça', recipe_type: recipe_type,
+    other_recipe = Recipe.create(user: user, title: 'Bolo de maça', recipe_type: recipe_type,
                             cuisine: cuisine, difficulty: 'Média',
                             cook_time: '30', ingredients: 'farinha, ovo, maça',
                             cook_method: 'misture tudo e coloque no forno')

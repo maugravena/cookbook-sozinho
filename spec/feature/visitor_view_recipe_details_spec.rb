@@ -4,7 +4,9 @@ feature 'Visitor view recipe details' do
   scenario 'Successfully' do
     recipe_type = RecipeType.create(name: 'Sobremesa')
     cuisine = Cuisine.create(name: 'Brasileira')
-    recipe = Recipe.create!(title: 'Bolo de cenoura', recipe_type: recipe_type,
+    user = User.create(email: 'email@email.com', password: '123456')
+
+    recipe = Recipe.create!(user: user, title: 'Bolo de cenoura', recipe_type: recipe_type,
                             cuisine: cuisine, difficulty: 'Média',
                             cook_time: '30', ingredients: 'farinha, ovo, cenoura',
                             cook_method: 'misture tudo e coloque no forno')
