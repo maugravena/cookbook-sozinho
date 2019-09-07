@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+  before_action :authenticate_user!, only: %i[new] 
+
   def show
     @recipe = Recipe.find(params[:id])
   end

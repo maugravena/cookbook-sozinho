@@ -25,15 +25,6 @@ feature 'User a search recipe' do
     expect(page).not_to have_css('h3', text: 'Torta de maça')
   end
 
-  scenario "by exact name and don't find" do
-    visit root_path
-
-    fill_in 'Buscar receita:', with: 'Bolo de cenoura'
-    click_on 'Pesquisar'
-
-    expect(page).not_to have_css('h3', text: 'Bolo de cenoura')
-  end
-
   scenario 'by partial name and find more than one' do
     recipe_type = RecipeType.create(name: 'Sobremesa')
     cuisine = Cuisine.create(name: 'Brasileira')
@@ -56,5 +47,14 @@ feature 'User a search recipe' do
 
     expect(page).to have_css('h3', text: 'Bolo de cenoura')
     expect(page).to have_css('h3', text: 'Bolo de maça')
+  end
+
+  scenario "by exact name and don't find" do
+    visit root_path
+
+    fill_in 'Buscar receita:', with: 'Bolo de cenoura'
+    click_on 'Pesquisar'
+
+    expect(page).not_to have_css('h3', text: 'Bolo de cenoura')
   end
 end

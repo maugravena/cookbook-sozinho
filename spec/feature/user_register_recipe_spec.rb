@@ -6,9 +6,9 @@ feature 'User register recipe' do
     cuisine = Cuisine.create(name: 'Brasileira')
     user = User.create(email: 'email@email.com', password: '123456')
     recipe = Recipe.create(user: user, title: 'Torta de Berinjela', recipe_type: recipe_type,
-              cuisine: cuisine, difficulty: 'Média', cook_time: 20,
-              ingredients: 'Farinha, berinjela e sal',
-              cook_method: 'Misture tudo e coloque no forno')
+                           cuisine: cuisine, difficulty: 'Média', cook_time: 20,
+                           ingredients: 'Farinha, berinjela e sal',
+                           cook_method: 'Misture tudo e coloque no forno')
 
     visit root_path
 
@@ -67,9 +67,15 @@ feature 'User register recipe' do
     expect(page).to have_content 'Você deve informar todos os dados da receita'
   end
 
-  scenario 'but need to be authenticated' do
+  scenario 'but need to be authenticated to view link' do
     visit root_path
 
     expect(page).to have_no_css 'a', text: 'Enviar uma receita'
+  end
+
+  scenario 'and must be logged to access from url' do 
+    visit new_recipe_path
+
+    expect(current_path).to eq new_user_session_path
   end
 end

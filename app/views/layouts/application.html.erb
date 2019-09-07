@@ -11,6 +11,7 @@
 
     <% if user_signed_in? %>
       <%= link_to 'Enviar uma receita', new_recipe_path %>
+      <%= link_to 'Minhas Receitas', user_recipes_path %>
       <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
     <% else %>
       <%= link_to 'Fazer cadastro', new_user_registration_path %>
@@ -18,10 +19,10 @@
     <% end %>
 
     <%= flash[:notice] %>
-    <%= form_with url: recipes_path, method: 'get' do %>
+    <%= form_tag search_path, method: :get do %>
       <%= label_tag :q, 'Buscar receita:' %>
-      <%= text_field_tag :q %>
-      <%= submit_tag 'Pesquisar' %>
+      <%= text_field_tag :q, params[:q] %>
+      <%= submit_tag 'Pesquisar', name: nil %>
     <% end %>
     <%= yield %>
   </body>

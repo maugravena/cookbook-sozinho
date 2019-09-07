@@ -10,7 +10,7 @@ feature 'Visitor view recipe details' do
                             cuisine: cuisine, difficulty: 'Média',
                             cook_time: '30', ingredients: 'farinha, ovo, cenoura',
                             cook_method: 'misture tudo e coloque no forno')
-
+    
     visit root_path
     click_on 'Bolo de cenoura'
 
