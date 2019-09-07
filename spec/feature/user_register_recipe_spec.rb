@@ -11,7 +11,6 @@ feature 'User register recipe' do
                            cook_method: 'Misture tudo e coloque no forno')
 
     visit root_path
-
     click_on 'Entrar'
 
     fill_in 'Email', with: 'email@email.com'
@@ -45,8 +44,8 @@ feature 'User register recipe' do
     RecipeType.create(name: 'Salgada')
     Cuisine.create(name: 'Brasileira')
     User.create(email: 'email@email.com', password: '123456')
+    
     visit root_path
-
     click_on 'Entrar'
 
     fill_in 'Email', with: 'email@email.com'

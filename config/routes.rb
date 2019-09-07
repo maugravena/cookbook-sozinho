@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get 'search', to: 'home#index'
 
+  resources :recipe_types, only: %i[new create]
   resources :recipes, only: %i[show new create edit update]
 
   namespace :user do
