@@ -13,5 +13,13 @@
   <%= f.text_area :ingredients %>
   <%= f.label :cook_method, 'Modo de Preparo' %>
   <%= f.text_area :cook_method %>
+
+  <% if current_user.admin %>
+    <%= f.radio_button :status, :approved %>
+    <%= f.label :approved, 'Aprovar' %>
+    <%= f.radio_button :status, :rejected %>
+    <%= f.label :rejected, 'Rejeitar' %>
+  <% end %>
+
   <%= f.submit 'Enviar'%>
 <% end %>

@@ -1,11 +1,19 @@
 <h1>Cookbook</h1>
 
+<%= form_tag search_path, method: :get do %>
+  <%= label_tag :q, 'Buscar receita:' %>
+  <%= text_field_tag :q, params[:q] %>
+  <%= submit_tag 'Pesquisar', name: nil %>
+<% end %>
+
 <% @recipes.each do |recipe| %>
-  <h3><%= link_to recipe.title, recipe_path(recipe) %></h3>
-  <ul>
-    <li><%= recipe.recipe_type.name %></li>
-    <li><%= recipe.cuisine.name %></li>
-    <li><%= recipe.difficulty %></li>
-    <li><%= recipe.cook_time %></li>
-  </ul>
+  <% if recipe.approved? %>
+    <h3><%= link_to recipe.title, recipe_path(recipe) %></h3>
+    <ul>
+      <li><%= recipe.recipe_type.name %></li>
+      <li><%= recipe.cuisine.name %></li>
+      <li><%= recipe.difficulty %></li>
+      <li><%= recipe.cook_time %></li>
+    </ul>
+  <% end %>
 <% end %>

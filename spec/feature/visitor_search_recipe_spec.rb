@@ -9,7 +9,7 @@ feature 'User a search recipe' do
     recipe = Recipe.create(user: user,title: 'Bolo de cenoura', recipe_type: recipe_type,
                             cuisine: cuisine, difficulty: 'Média',
                             cook_time: '30', ingredients: 'farinha, ovo, cenoura',
-                            cook_method: 'misture tudo e coloque no forno')
+                            cook_method: 'misture tudo e coloque no forno', status: 'approved')
 
     other_recipe = Recipe.create(user: user, title: 'Torta de maça', recipe_type: recipe_type,
                             cuisine: cuisine, difficulty: 'Média',
@@ -33,12 +33,12 @@ feature 'User a search recipe' do
     recipe = Recipe.create(user: user, title: 'Bolo de cenoura', recipe_type: recipe_type,
                             cuisine: cuisine, difficulty: 'Média',
                             cook_time: '30', ingredients: 'farinha, ovo, cenoura',
-                            cook_method: 'misture tudo e coloque no forno')
+                            cook_method: 'misture tudo e coloque no forno', status: 'approved')
 
     other_recipe = Recipe.create(user: user, title: 'Bolo de maça', recipe_type: recipe_type,
                             cuisine: cuisine, difficulty: 'Média',
                             cook_time: '30', ingredients: 'farinha, ovo, maça',
-                            cook_method: 'misture tudo e coloque no forno')
+                            cook_method: 'misture tudo e coloque no forno', status: 'approved')
 
     visit root_path
 

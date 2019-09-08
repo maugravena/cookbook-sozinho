@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   resources :cuisines, only: %i[new create]
   resources :recipe_types, only: %i[new create]
-  resources :recipes, only: %i[show new create edit update]
+  resources :recipes, only: %i[show new create edit update] do
+    get 'pending', on: :collection
+  end
 
   namespace :user do
     resources :recipes, only: %i[index]

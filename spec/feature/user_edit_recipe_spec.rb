@@ -8,9 +8,15 @@ feature 'User edit recipe' do
     Recipe.create!(user: user, title: 'Bolodecenoura', recipe_type: recipe_type,
                    cuisine: cuisine, difficulty: 'Média',
                    cook_time: 30, ingredients: 'farinha, ovo, cenoura',
-                   cook_method: 'Misture tudo e coloque no forno')
+                   cook_method: 'Misture tudo e coloque no forno', status: 'approved')
 
     visit root_path
+
+    click_on 'Entrar'
+    fill_in 'Email', with: 'email@email.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+
     click_on 'Bolodecenoura'
     click_on 'Editar'
 
@@ -23,6 +29,7 @@ feature 'User edit recipe' do
     fill_in 'Modo de Preparo', with: 'Misture tudo e coloque no forno'
     click_on 'Enviar'
 
+    expect(page).to have_text 'Receita atualizada com sucesso'
     expect(page).to have_css('h3', text: 'Bolo de cenoura')
     expect(page).to have_css('p', text: 'Sobremesa')
     expect(page).to have_css('p', text: 'Brasileira')

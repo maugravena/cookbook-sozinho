@@ -1,0 +1,5 @@
+<h1>Receitas pendentes</h1>
+
+<% @pending_recipes.each do |recipe| %>
+  <h3><%= link_to recipe.title, edit_recipe_path(recipe) %></h3>
+<% end %>
