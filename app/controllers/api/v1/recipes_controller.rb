@@ -1,6 +1,7 @@
 class Api::V1::RecipesController < Api::V1::ApiController
+  before_action :set_recipe, only: %i[show update destroy]
+
   def show
-    @recipe = Recipe.find_by!(id: params[:id])
     render json: { recipe: @recipe }, status: 202
   end
 
@@ -10,7 +11,20 @@ class Api::V1::RecipesController < Api::V1::ApiController
                     message: 'Receita enviada com sucesso' }, status: 201
   end
 
+  def update
+    render json: @recipe, status: 202 if @recipe.update(recipe_params)
+  end
+
+  def destroy
+    @recipe.destroy
+    render json: 'Receita removida com sucesso', status: 202
+  end
+
   private
+
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
 
   def recipe_params
     params.require(:recipe).permit(:title, :recipe_type_id, :cuisine_id,
