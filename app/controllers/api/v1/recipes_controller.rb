@@ -1,13 +1,8 @@
 class Api::V1::RecipesController < Api::V1::ApiController
   def create
     @recipe = Recipe.create!(recipe_params)
-
-    if @recipe.valid?
-      render json: { recipe: @recipe,
-                     message: 'Receita enviada com sucesso' }, status: 201
-    end
-  rescue ActiveRecord::RecordInvalid
-    render json: 'Todos atributos são obrigatórios', status: 412
+    render json: { recipe: @recipe,
+                    message: 'Receita enviada com sucesso' }, status: 201
   end
 
   private

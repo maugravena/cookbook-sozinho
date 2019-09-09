@@ -27,6 +27,6 @@ describe 'register recipes from api' do
                              cook_method: '' }}
     
     expect(response.status).to eq 412
-    expect(response.body).to include 'Todos atributos são obrigatórios'
+    expect(response.body).to include 'Atributos obrigatórios'
   end
 end
