@@ -1,6 +1,20 @@
 class Api::V1::RecipesController < Api::V1::ApiController
   before_action :set_recipe, only: %i[show update destroy]
 
+  def index
+    if !params[:recipe]
+      @recipes = Recipe.all
+    else
+      @recipes = Recipe.where(status: params[:recipe][:status])
+    end
+    
+    if @recipes.empty?
+      render json: 'Não encontrado', status: 404
+    else
+      render json: @recipes, status: 202
+    end
+  end
+
   def show
     render json: { recipe: @recipe }, status: 202
   end
