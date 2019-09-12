@@ -16,7 +16,7 @@ class Api::V1::RecipesController < Api::V1::ApiController
   end
 
   def show
-    render json: { recipe: @recipe }, status: 202
+    render json: @recipe, status: 202
   end
 
   def create
