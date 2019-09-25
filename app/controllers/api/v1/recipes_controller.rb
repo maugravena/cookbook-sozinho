@@ -1,5 +1,6 @@
 class Api::V1::RecipesController < Api::V1::ApiController
   before_action :set_recipe, only: %i[show update destroy]
+  before_action :check_auth, only: %i[update]
 
   def index
     if !params[:recipe]
@@ -38,6 +39,15 @@ class Api::V1::RecipesController < Api::V1::ApiController
 
   def set_recipe
     @recipe = Recipe.find(params[:id])
+  end
+
+  def check_auth
+    authenticate_or_request_with_http_basic do |username,password|
+      resource = User.find_by_email(username)
+      if resource.valid_password?(password.to_s)
+        sign_in :user, resource
+      end
+    end
   end
 
   def recipe_params

@@ -1,17 +1,22 @@
 require 'rails_helper'
 
 describe 'api edit recipe' do
+  before(:each) do
+    sign_in_basic 
+  end
+
   it 'successfully' do
     recipe_type = RecipeType.create(name: 'Salgada')
     cuisine = Cuisine.create(name: 'Brasileira')
-    user = User.create(email: 'email@email.com', password: '123456')
+    user = User.create(email: 'user@email.com', password: '123456')
     recipe = Recipe.create(user: user, title: 'TortadeBerinjela', recipe_type: recipe_type,
                            cuisine: cuisine, difficulty: 'Média', cook_time: 20,
                            ingredients: 'Farinha, berinjela e sal',
                            cook_method: 'Misture tudo e coloque no forno')
     
     patch api_v1_recipe_path(recipe),
-          params: { recipe: { title: 'Torta de Berinjela', difficulty: 'Difícil' } }
+          params: {recipe: {title: 'Torta de Berinjela', difficulty: 'Difícil'}},
+          headers: @env
     
     expect(response.status).to eq 202
     expect(response.body).to include 'Torta de Berinjela'
@@ -21,14 +26,15 @@ describe 'api edit recipe' do
   it 'to change status' do
     recipe_type = RecipeType.create(name: 'Salgada')
     cuisine = Cuisine.create(name: 'Brasileira')
-    user = User.create(email: 'email@email.com', password: '123456')
+    user = User.create(email: 'user@email.com', password: '123456')
     recipe = Recipe.create(user: user, title: 'TortadeBerinjela', recipe_type: recipe_type,
                            cuisine: cuisine, difficulty: 'Média', cook_time: 20,
                            ingredients: 'Farinha, berinjela e sal',
                            cook_method: 'Misture tudo e coloque no forno')
     
     patch api_v1_recipe_path(recipe),
-          params: { recipe: { status: :approved } }
+          params: {recipe: { status: :approved }},
+          headers: @env
 
     expect(response.status).to eq 202
     expect(response.body).to include 'approved'
