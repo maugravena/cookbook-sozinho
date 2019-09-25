@@ -1,4 +1,7 @@
 class Api::V1::RecipeTypesController < Api::V1::ApiController
+  skip_before_action :verify_authenticity_token
+  before_action :check_auth, only: %i[create]
+
   def show
     @recipe_type = RecipeType.find(params[:id])
     @recipes = @recipe_type.recipes
@@ -15,6 +18,15 @@ class Api::V1::RecipeTypesController < Api::V1::ApiController
   private
 
   def recipe_type_params
-    params.require(:recipe_type).permit(:name)
+    params.permit(:name)
+  end
+
+  def check_auth
+    authenticate_or_request_with_http_basic do |username,password|
+      resource = User.find_by_email(username)
+      if resource.valid_password?(password.to_s)
+        sign_in :user, resource
+      end
+    end
   end
 end

@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'find by email' do
+    user = User.create(email: 'test@email.com', password: '123456')
+    find_user = User.find_by_email('test@email.com')
+
+    expect(user).to eq find_user
+  end
 end
