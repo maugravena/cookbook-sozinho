@@ -6,19 +6,38 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 #
-User.create(email: Faker::Internet.email, password: '123123')
-RecipeType.create(name: 'Salgada')
-Cuisine.create(name: 'Brasileira')
+User.create!([
+  { email: 'user@email.com', password: '123123' },
+  { email: 'user_other@email.com', password: '123123' },
+  { email: 'admin@email.com', password: '123123', admin: true }
+])
 
-25.times do
-  Recipe.create(
+recipe_types = RecipeType.create!([{ name: 'Salgada' }, { name: 'Doce' }])
+cuisines = Cuisine.create!([{ name: 'Brasileira' }, { name: 'Japonesa' }])
+levels = ['Easy', 'Medium', 'Hard']
+
+12.times do
+  Recipe.create!(
     title: Faker::Food.dish,
-    difficulty: 'Easy',
+    difficulty: levels.sample,
     cook_time: rand(10...40),
     ingredients: Faker::Food.ingredient,
     cook_method: Faker::Lorem.words(number: 10).join(' '),
-    recipe_type_id: 1,
-    cuisine_id: 1,
+    recipe_type_id: recipe_types.sample.id,
+    cuisine_id: cuisines.sample.id,
     user_id: 1
+  )
+end
+
+12.times do
+  Recipe.create!(
+    title: Faker::Food.dish,
+    difficulty: levels.sample,
+    cook_time: rand(10...40),
+    ingredients: Faker::Food.ingredient,
+    cook_method: Faker::Lorem.words(number: 10).join(' '),
+    recipe_type_id: recipe_types.sample.id,
+    cuisine_id: cuisines.sample.id,
+    user_id: 2
   )
 end
