@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'home#index'
-  get 'search', to: 'home#index'
-
+  
   resources :cuisines, only: %i[new create]
   resources :recipe_types, only: %i[new create]
   resources :recipes, only: %i[show new create edit update] do
     get 'pending', on: :collection
+    get 'search', on: :collection, to: 'home#search'
   end
 
   namespace :user do
