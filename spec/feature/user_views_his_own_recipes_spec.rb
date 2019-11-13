@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 feature 'user views his own recipes' do
+  let(:user) { create(:user) }
+
   scenario 'successfully' do
-    user = User.create(email: 'email@email.com', password: '123456')
     recipe_type = RecipeType.create(name: 'Salgada')
     cuisine = Cuisine.create(name: 'Brasileira')
 
@@ -16,13 +17,14 @@ feature 'user views his own recipes' do
                              cook_time: 30, ingredients: 'farinha, ovo, cenoura',
                              cook_method: 'Misture tudo e coloque no forno')
 
+    login_as user, scope: :user
     visit root_path
 
-    click_on 'Entrar'
+    #click_on 'Entrar'
 
-    fill_in 'Email', with: 'email@email.com'
-    fill_in 'Password', with: '123456'
-    click_on 'Log in'
+    #fill_in 'Email', with: 'email@email.com'
+    #fill_in 'Password', with: '123456'
+    #click_on 'Log in'
 
     click_on 'Minhas Receitas'
 
