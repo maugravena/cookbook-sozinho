@@ -4,18 +4,10 @@ feature 'user views his own recipes' do
   let(:user) { create(:user) }
 
   scenario 'successfully' do
-    recipe_type = RecipeType.create(name: 'Salgada')
-    cuisine = Cuisine.create(name: 'Brasileira')
-
-    recipe_x = Recipe.create(user: user, title: 'Torta de Berinjela', recipe_type: recipe_type,
-                           cuisine: cuisine, difficulty: 'Média', cook_time: 20,
-                           ingredients: 'Farinha, berinjela e sal',
-                           cook_method: 'Misture tudo e coloque no forno')
-    
-    recipe_y = Recipe.create(user: user, title: 'Bolodecenoura', recipe_type: recipe_type,
-                             cuisine: cuisine, difficulty: 'Média',
-                             cook_time: 30, ingredients: 'farinha, ovo, cenoura',
-                             cook_method: 'Misture tudo e coloque no forno')
+    recipe_type = create(:recipe_type)
+    cuisine = create(:cuisine)
+    recipe_x = create(:recipe, recipe_type: recipe_type, cuisine: cuisine, user: user)
+    recipe_y = create(:recipe, title: 'Bolo de cenoura', recipe_type: recipe_type, cuisine: cuisine, user: user)
 
     login_as user, scope: :user
     visit root_path
@@ -31,6 +23,11 @@ feature 'user views his own recipes' do
     expect(page).to have_css 'h1', text: "Suas Receitas - #{user.email}"
     expect(page).to have_content recipe_x.title
     expect(page).to have_content recipe_y.title
+  end
+
+  scenario 'in home' do
+    login_as user, scope: :user
+    visit root_path
   end
 
   scenario 'and must be logged in to view link' do
