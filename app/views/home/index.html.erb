@@ -7,13 +7,11 @@
 <% end %>
 
 <% @recipes.each do |recipe| %>
-  <% if recipe.approved? %>
-    <h3><%= link_to recipe.title, recipe_path(recipe) %></h3>
-    <ul>
-      <li><%= recipe.recipe_type.name %></li>
-      <li><%= recipe.cuisine.name %></li>
-      <li><%= recipe.difficulty %></li>
-      <li><%= recipe.cook_time %></li>
-    </ul>
-  <% end %>
+  <h3><%= link_to recipe.title, recipe_path(recipe) %></h3>
+  <ul>
+    <li><%= recipe.recipe_type.name %></li>
+    <li><%= recipe.cuisine.name %></li>
+    <li><%= recipe.difficulty %></li>
+    <li><%= recipe.cook_time %></li>
+  </ul>
 <% end %>

@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @recipes = Recipe.last(6)
+    @recipes = Recipe.where(status: :approved).last(6)
   end
   
   def search
