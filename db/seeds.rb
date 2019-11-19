@@ -34,7 +34,7 @@ end
     title: Faker::Food.dish,
     difficulty: levels.sample,
     cook_time: rand(10...40),
-    ingredients: Faker::Lorem.words(number: rand(3..6)),
+    ingredients: Faker::Lorem.words(number: rand(3..6)).join(', '),
     cook_method: Faker::Lorem.words(number: 10).join(' '),
     recipe_type_id: recipe_types.sample.id,
     cuisine_id: cuisines.sample.id,

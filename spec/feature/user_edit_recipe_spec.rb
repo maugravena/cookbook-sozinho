@@ -1,43 +1,47 @@
 require 'rails_helper'
 
 feature 'User edit recipe' do
-  scenario 'Successfully' do
-    recipe_type = RecipeType.create(name: 'Sobremesa')
-    cuisine = Cuisine.create(name: 'Brasileira')
-    user = User.create(email: 'email@email.com', password: '123456')
-    Recipe.create!(user: user, title: 'Bolodecenoura', recipe_type: recipe_type,
-                   cuisine: cuisine, difficulty: 'Média',
-                   cook_time: 30, ingredients: 'farinha, ovo, cenoura',
-                   cook_method: 'Misture tudo e coloque no forno', status: 'approved')
+  let(:user) { create(:user) }
 
+  scenario 'Successfully' do
+    recipe = create(:recipe, user: user, status: :approved)
+
+    login_as user, scope: :user
     visit root_path
 
-    click_on 'Entrar'
-    fill_in 'Email', with: 'email@email.com'
-    fill_in 'Password', with: '123456'
-    click_on 'Log in'
-
-    click_on 'Bolodecenoura'
+    click_on recipe.title
     click_on 'Editar'
 
-    fill_in 'Título', with: 'Bolo de cenoura'
-    select 'Sobremesa', from: 'Tipo da Receita'
-    select 'Brasileira', from: 'Cozinha'
-    fill_in 'Dificuldade', with: 'Média'
-    fill_in 'Tempo de Preparo', with: 30
-    fill_in 'Ingredientes', with: 'farinha, ovo, cenoura'
-    fill_in 'Modo de Preparo', with: 'Misture tudo e coloque no forno'
+    fill_in 'Título', with: 'Título atualizado'
+    select recipe.recipe_type.name, from: 'Tipo da Receita'
+    select recipe.cuisine.name, from: 'Cozinha'
+    fill_in 'Dificuldade', with: recipe.difficulty 
+    fill_in 'Tempo de Preparo', with: recipe.cook_time
+    fill_in 'Ingredientes', with: recipe.ingredients
+    fill_in 'Modo de Preparo', with: recipe.cook_method
     click_on 'Enviar'
 
     expect(page).to have_text 'Receita atualizada com sucesso'
-    expect(page).to have_css('h3', text: 'Bolo de cenoura')
-    expect(page).to have_css('p', text: 'Sobremesa')
-    expect(page).to have_css('p', text: 'Brasileira')
-    expect(page).to have_css('p', text: 'Média')
-    expect(page).to have_css('p', text: '30 minutos')
+    expect(page).to have_css('h3', text: 'Título atualizado')
+    expect(page).to have_css('p', text: recipe.recipe_type.name)
+    expect(page).to have_css('p', text: recipe.cuisine.name)
+    expect(page).to have_css('p', text: recipe.difficulty)
+    expect(page).to have_css('p', text: recipe.cook_method)
     expect(page).to have_css('h3', text: 'Ingredientes')
-    expect(page).to have_css('p', text: 'farinha, ovo, cenoura')
+    expect(page).to have_css('p', text: recipe.ingredients)
     expect(page).to have_css('h3', text: 'Como Preparar')
-    expect(page).to have_css('p', text: 'Misture tudo e coloque no forno')
+    expect(page).to have_css('p', text: recipe.cook_method)
+  end
+
+  scenario 'show button to owner only' do
+    other_user = create(:user, email: 'other_user@email.com')
+    recipe = create(:recipe, status: :approved)
+
+    login_as other_user, scope: user
+    visit root_path
+
+    click_on recipe.title
+
+    expect(page).to have_no_link 'Editar'
   end
 end
