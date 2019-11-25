@@ -25,6 +25,7 @@ levels = ['Easy', 'Medium', 'Hard']
     cook_method: Faker::Lorem.sentence(word_count: rand(5..12)),
     recipe_type_id: recipe_types.sample.id,
     cuisine_id: cuisines.sample.id,
+    recipe_photo: '/home/mau/Pictures/Mac-1-PSD.jpg',
     user_id: 1
   )
 end
@@ -38,6 +39,7 @@ end
     cook_method: Faker::Lorem.words(number: 10).join(' '),
     recipe_type_id: recipe_types.sample.id,
     cuisine_id: cuisines.sample.id,
+    recipe_photo: '/home/mau/Pictures/Mac-1-PSD.jpg',
     user_id: 2
   )
 end
