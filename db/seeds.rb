@@ -16,8 +16,8 @@ recipe_types = RecipeType.create!([{ name: 'Salgada' }, { name: 'Doce' }])
 cuisines = Cuisine.create!([{ name: 'Brasileira' }, { name: 'Japonesa' }])
 levels = ['Easy', 'Medium', 'Hard']
 
-12.times do
-  Recipe.create!(
+12.times do |i|
+  r = Recipe.create!(
     title: Faker::Food.dish,
     difficulty: levels.sample,
     cook_time: rand(10...40),
@@ -25,13 +25,19 @@ levels = ['Easy', 'Medium', 'Hard']
     cook_method: Faker::Lorem.sentence(word_count: rand(5..12)),
     recipe_type_id: recipe_types.sample.id,
     cuisine_id: cuisines.sample.id,
-    recipe_photo: '/home/mau/Pictures/Mac-1-PSD.jpg',
-    user_id: 1
+    user_id: 1,
+    status: [:pending, :approved].sample
+  )
+  r.recipe_photo.attach(
+    io: File.open(
+      "#{::Rails.root}/public/assets/images/recipe#{i}.jpg"
+    ), 
+    filename: "recipe#{i}.jpg", content_type: 'image/jpg'
   )
 end
 
-12.times do
-  Recipe.create!(
+12.times do |i=12|
+  r = Recipe.create!(
     title: Faker::Food.dish,
     difficulty: levels.sample,
     cook_time: rand(10...40),
@@ -39,7 +45,13 @@ end
     cook_method: Faker::Lorem.words(number: 10).join(' '),
     recipe_type_id: recipe_types.sample.id,
     cuisine_id: cuisines.sample.id,
-    recipe_photo: '/home/mau/Pictures/Mac-1-PSD.jpg',
-    user_id: 2
+    user_id: 2,
+    status: [:pending, :approved].sample
+  )
+  r.recipe_photo.attach(
+    io: File.open(
+      "#{::Rails.root}/public/assets/images/recipe#{i}.jpg"
+    ), 
+    filename: "recipe#{i}.jpg", content_type: 'image/jpg'
   )
 end
