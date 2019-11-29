@@ -1,14 +1,18 @@
-class Api::V1::ApiController < ApplicationController
-  rescue_from ActiveRecord::RecordInvalid, with: :params_required
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+module Api
+  module V1
+    class ApiController < ApplicationController
+      rescue_from ActiveRecord::RecordInvalid, with: :params_required
+      rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
-  private
+      private
 
-  def params_required
-    render json: {message: 'Atributos obrigatórios'}, status: 412
-  end
+      def params_required
+        render json: { message: 'Atributos obrigatórios' }, status: :precondition_failed
+      end
 
-  def not_found
-  render json: {message: 'Não encontrado'}, status: 404
+      def not_found
+        render json: { message: 'Não encontrado' }, status: :not_found
+      end
+    end
   end
 end

@@ -27,20 +27,20 @@ Layout/EmptyLines:
 # SupportedColonStyles: key, separator, table
 # SupportedLastArgumentHashStyles: always_inspect, always_ignore, ignore_implicit, ignore_explicit
 Layout/HashAlignment:
-  Exclude:
+  Include:
     - 'app/controllers/api/v1/recipes_controller.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: Width, IgnoredPatterns.
 Layout/IndentationWidth:
-  Exclude:
+  Include:
     - 'app/controllers/api/v1/api_controller.rb'
 
 # Offense count: 3
 # Cop supports --auto-correct.
 Layout/SpaceAfterComma:
-  Exclude:
+  Include:
     - 'app/controllers/api/v1/recipe_types_controller.rb'
     - 'app/controllers/api/v1/recipes_controller.rb'
 
@@ -50,7 +50,7 @@ Layout/SpaceAfterComma:
 # SupportedStyles: space, no_space, compact
 # SupportedStylesForEmptyBraces: space, no_space
 Layout/SpaceInsideHashLiteralBraces:
-  Exclude:
+  Include:
     - 'app/controllers/api/v1/api_controller.rb'
 
 # Offense count: 3
@@ -58,7 +58,7 @@ Layout/SpaceInsideHashLiteralBraces:
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: final_newline, final_blank_line
 Layout/TrailingEmptyLines:
-  Exclude:
+  Include:
     - 'app/controllers/cuisines_controller.rb'
     - 'app/controllers/recipe_types_controller.rb'
     - 'app/controllers/user/recipes_controller.rb'
@@ -67,7 +67,7 @@ Layout/TrailingEmptyLines:
 # Cop supports --auto-correct.
 # Configuration parameters: AllowInHeredoc.
 Layout/TrailingWhitespace:
-  Exclude:
+  Include:
     - 'app/controllers/api/v1/recipes_controller.rb'
     - 'app/controllers/cuisines_controller.rb'
     - 'app/controllers/home_controller.rb'
@@ -90,7 +90,7 @@ Metrics/MethodLength:
 # Configuration parameters: Whitelist.
 # Whitelist: find_by_sql
 Rails/DynamicFindBy:
-  Exclude:
+  Include:
     - 'app/controllers/api/v1/recipe_types_controller.rb'
     - 'app/controllers/api/v1/recipes_controller.rb'
 
@@ -99,14 +99,14 @@ Rails/DynamicFindBy:
 # Configuration parameters: Include.
 # Include: app/models/**/*.rb
 Rails/EnumHash:
-  Exclude:
+  Include:
     - 'app/models/recipe.rb'
 
 # Offense count: 3
 # Configuration parameters: Include.
 # Include: app/models/**/*.rb
 Rails/HasManyOrHasOneDependent:
-  Exclude:
+  Include:
     - 'app/models/cuisine.rb'
     - 'app/models/recipe_type.rb'
     - 'app/models/user.rb'
@@ -116,7 +116,7 @@ Rails/HasManyOrHasOneDependent:
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: numeric, symbolic
 Rails/HttpStatus:
-  Exclude:
+  Include:
     - 'app/controllers/api/v1/api_controller.rb'
     - 'app/controllers/api/v1/recipe_types_controller.rb'
     - 'app/controllers/api/v1/recipes_controller.rb'
@@ -126,7 +126,7 @@ Rails/HttpStatus:
 # Configuration parameters: AutoCorrect, EnforcedStyle.
 # SupportedStyles: nested, compact
 Style/ClassAndModuleChildren:
-  Exclude:
+  Include:
     - 'app/controllers/api/v1/api_controller.rb'
     - 'app/controllers/api/v1/recipe_types_controller.rb'
     - 'app/controllers/api/v1/recipes_controller.rb'
@@ -137,7 +137,7 @@ Style/ClassAndModuleChildren:
 # Configuration parameters: EnforcedStyle, SingleLineConditionsOnly, IncludeTernaryExpressions.
 # SupportedStyles: assign_to_condition, assign_inside_condition
 Style/ConditionalAssignment:
-  Exclude:
+  Include:
     - 'app/controllers/api/v1/recipes_controller.rb'
     - 'app/controllers/cuisines_controller.rb'
     - 'app/controllers/recipe_types_controller.rb'
@@ -149,7 +149,7 @@ Style/Documentation:
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/ExpandPathArguments:
-  Exclude:
+  Include:
     - 'bin/rails'
     - 'bin/rake'
 
@@ -163,7 +163,7 @@ Style/FrozenStringLiteralComment:
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/IfUnlessModifier:
-  Exclude:
+  Include:
     - 'app/controllers/api/v1/recipe_types_controller.rb'
     - 'app/controllers/api/v1/recipes_controller.rb'
 
@@ -176,13 +176,13 @@ Style/MixinUsage:
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/RedundantBegin:
-  Exclude:
+  Include:
     - 'bin/yarn'
 
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/StderrPuts:
-  Exclude:
+  Include:
     - 'bin/yarn'
 
 # Offense count: 3
@@ -190,7 +190,7 @@ Style/StderrPuts:
 # Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
 # SupportedStyles: single_quotes, double_quotes
 Style/StringLiterals:
-  Exclude:
+  Include:
     - 'bin/yarn'
 
 # Offense count: 3
@@ -198,7 +198,7 @@ Style/StringLiterals:
 # Configuration parameters: EnforcedStyle, MinSize.
 # SupportedStyles: percent, brackets
 Style/SymbolArray:
-  Exclude:
+  Include:
     - 'Gemfile'
     - 'app/models/recipe.rb'
 
