@@ -8,13 +8,13 @@ module Api
         @recipe_type = RecipeType.find(params[:id])
         @recipes = @recipe_type.recipes
         render json: { recipe_type: @recipe_type.name,
-                      recipes: @recipes }, status: :accepted
+                       recipes: @recipes }, status: :accepted
       end
 
       def create
         @recipe_type = RecipeType.create!(recipe_type_params)
         render json: { recipe_type: @recipe_type,
-                      message: 'Tipo de receita enviado com sucesso' }, status: :created
+                       message: 'Tipo de receita enviado com sucesso' }, status: :created
       end
 
       private

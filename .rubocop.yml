@@ -7,3 +7,4 @@ AllCops:
     - 'db/**/*'
     - 'config/**/*'
     - 'spec/**/*'
+    - 'bin/*'

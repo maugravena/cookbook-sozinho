@@ -7,9 +7,9 @@ module Api
 
       def index
         @recipes = if !params[:recipe]
-                    Recipe.all
+                     Recipe.all
                    else
-                    Recipe.where(status: params[:recipe][:status])
+                     Recipe.where(status: params[:recipe][:status])
                    end
 
         if @recipes.empty?
