@@ -8,5 +8,5 @@ class Recipe < ApplicationRecord
   validates :title, :recipe_type_id, :cuisine_id, :difficulty, :cook_time,
             :ingredients, :cook_method, presence: true
 
-  enum status: [:pending, :rejected, :approved]
+  enum status: { pending: 0, rejected: 1, approved: 2 }
 end

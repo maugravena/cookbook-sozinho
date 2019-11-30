@@ -1,5 +1,5 @@
 class RecipeTypesController < ApplicationController
-  def new 
+  def new
     @recipe_type = RecipeType.new
   end
 
@@ -9,11 +9,11 @@ class RecipeTypesController < ApplicationController
     if @recipe_type.save
       redirect_to root_path, notice: 'Tipo de receita enviado com sucesso'
     else
-      if @recipe_type.errors.details[:name][0][:error] == :taken
-        flash.now[:alert] = 'Esse tipo de receita já existe'
-      else
-        flash.now[:alert] = 'Campo Obrigatório'
-      end
+      flash.now[:alert] = if @recipe_type.errors.details[:name][0][:error] == :taken
+                            'Esse tipo de receita já existe'
+                          else
+                            'Campo Obrigatório'
+                          end
       render :new
     end
   end
