@@ -1,8 +1,9 @@
 module Api
   module V1
     class RecipesController < ApiController
+      skip_before_action :verify_authenticity_token
       before_action :set_recipe, only: %i[show update destroy]
-      before_action :check_auth, only: %i[update]
+      before_action :check_auth, only: %i[create update]
 
       def index
         @recipes = if !params[:recipe]
@@ -44,8 +45,8 @@ module Api
       end
 
       def check_auth
-        authenticate_or_request_with_http_basic do |username, password|
-          resource = User.find_by(username)
+        authenticate_or_request_with_http_basic do |email, password|
+          resource = User.find_by(email: email)
           resource.valid_password?(password.to_s) if sign_in :user, resource
         end
       end

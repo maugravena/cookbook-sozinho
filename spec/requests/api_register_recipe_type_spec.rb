@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'api register recipe type' do
   before(:each) do 
     sign_in_basic 
-    User.create(email: 'user@email.com', password: '123456')
+    create(:user, email: 'user@email.com')
   end
 
   it 'sucessfully' do

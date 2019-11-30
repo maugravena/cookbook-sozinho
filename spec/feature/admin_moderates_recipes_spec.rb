@@ -1,31 +1,16 @@
 require 'rails_helper'
 
 feature 'Admin moderates recipes' do
-  scenario 'to post' do
-    user = User.create(email: 'admin@email.com', password: '123456', admin: true)
-    recipe_type = RecipeType.create(name: 'Salgada')
-    cuisine = Cuisine.create(name: 'Brasileira')
-    
-    Recipe.create!(user: user, title: 'Bolo de cenoura', recipe_type: recipe_type,
-                   cuisine: cuisine, difficulty: 'Média',
-                   cook_time: 30, ingredients: 'farinha, ovo, cenoura',
-                   cook_method: 'Misture tudo e coloque no forno')
+  let(:admin) { create(:user, admin: true) }
 
-    Recipe.create(user: user, title: 'Torta de maça', recipe_type: recipe_type,
-                  cuisine: cuisine, difficulty: 'Média',
-                  cook_time: '30', ingredients: 'farinha, ovo, maça',
-                  cook_method: 'misture tudo e coloque no forno')
+  scenario 'to post' do
+    created_recipes = create_pair(:recipe)
     
+    login_as admin, scope: :user
     visit root_path
 
-    click_on 'Entrar'
-
-    fill_in 'Email', with: 'admin@email.com'
-    fill_in 'Password', with: '123456'
-    click_on 'Log in'
-
     click_on 'Receitas pendentes'
-    click_on 'Torta de maça'
+    click_on created_recipes[0].title
     
     choose 'recipe_status_approved'
     click_on 'Enviar'
@@ -35,31 +20,14 @@ feature 'Admin moderates recipes' do
   end
 
   scenario 'to reject' do
-    user = User.create(email: 'admin@email.com', password: '123456', admin: true)
-    recipe_type = RecipeType.create(name: 'Salgada')
-    cuisine = Cuisine.create(name: 'Brasileira')
+    created_recipes = create_pair(:recipe)
     
-    Recipe.create!(user: user, title: 'Bolo de cenoura', recipe_type: recipe_type,
-                   cuisine: cuisine, difficulty: 'Média',
-                   cook_time: 30, ingredients: 'farinha, ovo, cenoura',
-                   cook_method: 'Misture tudo e coloque no forno')
-
-    Recipe.create(user: user, title: 'Torta de maça', recipe_type: recipe_type,
-                  cuisine: cuisine, difficulty: 'Média',
-                  cook_time: '30', ingredients: 'farinha, ovo, maça',
-                  cook_method: 'misture tudo e coloque no forno')
-    
+    login_as admin, scope: :user
     visit root_path
 
-    click_on 'Entrar'
-
-    fill_in 'Email', with: 'admin@email.com'
-    fill_in 'Password', with: '123456'
-    click_on 'Log in'
-
     click_on 'Receitas pendentes'
-    click_on 'Torta de maça'
-
+    click_on created_recipes[1].title
+    
     choose 'recipe_status_rejected'
     click_on 'Enviar'
 

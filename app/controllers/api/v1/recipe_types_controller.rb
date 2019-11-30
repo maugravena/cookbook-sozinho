@@ -24,9 +24,9 @@ module Api
       end
 
       def check_auth
-        authenticate_or_request_with_http_basic do |username, password|
-          resource = User.find_by(username)
-          resource.valid_password?(password.to_s) unless sign_in :user, resource
+        authenticate_or_request_with_http_basic do |email, password|
+          resource = User.find_by(email: email)
+          resource.valid_password?(password.to_s) if sign_in :user, resource
         end
       end
     end
