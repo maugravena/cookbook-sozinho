@@ -30,7 +30,7 @@ levels = ['Easy', 'Medium', 'Hard']
   )
   r.recipe_photo.attach(
     io: File.open(
-      "#{::Rails.root}/public/assets/images/recipe#{i}.jpg"
+      "#{::Rails.root}/spec/support/recipe#{i}.jpg"
     ), 
     filename: "recipe#{i}.jpg", content_type: 'image/jpg'
   )
@@ -50,7 +50,7 @@ end
   )
   r.recipe_photo.attach(
     io: File.open(
-      "#{::Rails.root}/public/assets/images/recipe#{i}.jpg"
+      "#{::Rails.root}/spec/support/recipe#{i}.jpg"
     ), 
     filename: "recipe#{i}.jpg", content_type: 'image/jpg'
   )

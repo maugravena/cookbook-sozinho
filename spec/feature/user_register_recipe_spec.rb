@@ -18,7 +18,7 @@ feature 'User register recipe' do
     fill_in 'Tempo de Preparo', with: recipe.cook_time
     fill_in 'Ingredientes', with: recipe.ingredients
     fill_in 'Modo de Preparo', with: recipe.cook_method
-    attach_file 'Foto', "#{::Rails.root}/public/assets/images/recipe1.jpg"
+    attach_file 'Foto', "#{::Rails.root}/spec/support/recipe1.jpg"
     click_on 'Enviar'
 
     expect(page).to have_css('p', text: "Receita enviada por #{user.email}")
